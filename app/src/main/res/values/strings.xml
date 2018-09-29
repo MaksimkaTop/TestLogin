@@ -2,4 +2,6 @@
     <string name="app_name">TestLogin</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="must_be_email">must be email</string>
+    <string name="password_error">must be more 6 and less 40 symbols and only latin</string>
 </resources>
