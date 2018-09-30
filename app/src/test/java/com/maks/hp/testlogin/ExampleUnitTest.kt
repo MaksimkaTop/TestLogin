@@ -1,5 +1,6 @@
 package com.maks.hp.testlogin
 
+import com.maks.hp.testlogin.extensions.isValidEmail
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -11,7 +12,11 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun emailExt_isCorrect() {
+        assertEquals(true, "name@email.com".isValidEmail())
+    }
+    @Test
+    fun emailExt_isNotCorrect() {
+        assertEquals(false, "nameemailcom".isValidEmail())
     }
 }

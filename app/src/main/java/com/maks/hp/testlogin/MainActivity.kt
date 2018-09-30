@@ -12,7 +12,9 @@ import com.maks.hp.testlogin.extensions.isValidEmail
 import com.maks.hp.testlogin.extensions.isValidPassword
 import kotlinx.android.synthetic.main.activity_main.*
 import android.os.CountDownTimer
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
+import java.util.regex.Pattern
 
 
 class MainActivity : AppCompatActivity() {
