@@ -12,9 +12,7 @@ import com.maks.hp.testlogin.extensions.isValidEmail
 import com.maks.hp.testlogin.extensions.isValidPassword
 import kotlinx.android.synthetic.main.activity_main.*
 import android.os.CountDownTimer
-import android.util.Log
 import com.google.android.material.snackbar.Snackbar
-import java.util.regex.Pattern
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         breakErrorPassword()
     }
 
+    // если теряем фокус, то производим поверку на ошибку
     private fun checkFocusEmailAndPassword() {
         tiet_email.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) checkOnErrorEmail()
@@ -39,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // проверка на ошибкку почты
     private fun checkOnErrorEmail(): Boolean {
         return if (!tiet_email.text.toString().isValidEmail()) {
             til_email.error = getString(R.string.email_error)
@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // проверка на ошибку пароля
     private fun checkOnErrorPassword(): Boolean {
         return if (!tiet_password.text.toString().isValidPassword()) {
             til_password.error = getString(R.string.password_error)
@@ -61,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // решил дедать снимать ошибку таким способом
     private fun breakErrorEmail() {
         tiet_email.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
@@ -89,6 +91,8 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    // если в поле пароля нажать энтер то происходит проверка валидации пароля
+    // потом можно сделать логин в случае успеха
     private fun handleEnterOnPassword() {
         tiet_password.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE)
@@ -97,6 +101,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // состояния кнопки Login
     private fun handleLoginButtonState() {
         if (emailEnabled && passwordEnabled) {
             button_login.setBackgroundColor(ContextCompat.getColor(this, R.color.pass_green))
@@ -105,6 +110,7 @@ class MainActivity : AppCompatActivity() {
             button_login.setBackgroundColor(ContextCompat.getColor(this, R.color.error_red))
         }
     }
+
     //"кнопка отправляет запрос (запрос имитировать таймаутом),
     // в результате показывается окно ошибки либо приложение переходит на следующий экран"
     // отображать ошибку или переходить на экран решил реализовать рандомом
@@ -122,8 +128,9 @@ class MainActivity : AppCompatActivity() {
         }.start()
     }
 
-    private fun random(): Int =  0 + (Math.random() * 10).toInt()
+    private fun random(): Int = 0 + (Math.random() * 10).toInt() // сам рандом 1..10
 
+    // еще раз проверяем валидацию, если все ок, то идем на след. экран
     private fun doLogin() {
         if (!checkOnErrorPassword() && !checkOnErrorEmail()) {
             val intent = Intent(this, NextActivity::class.java)

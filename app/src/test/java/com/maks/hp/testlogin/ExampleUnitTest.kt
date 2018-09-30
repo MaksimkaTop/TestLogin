@@ -1,9 +1,9 @@
 package com.maks.hp.testlogin
 
-import com.maks.hp.testlogin.extensions.isValidEmail
 import org.junit.Test
 
 import org.junit.Assert.*
+import java.util.regex.Pattern
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -12,11 +12,14 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
     @Test
-    fun emailExt_isCorrect() {
-        assertEquals(true, "name@email.com".isValidEmail())
+    fun addition_isCorrect() {
+        assertEquals(4, 2 + 2)
     }
+
     @Test
-    fun emailExt_isNotCorrect() {
-        assertEquals(false, "nameemailcom".isValidEmail())
+    fun checkRegularPassword() {
+        val testParameter = "123qweZ"
+        testParameter.length in 6..40 &&
+                Pattern.compile("[a-zA-Z0-9]+").matcher(testParameter).matches()
     }
 }
